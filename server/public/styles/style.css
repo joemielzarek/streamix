@@ -1,0 +1,226 @@
+body {
+   background: linear-gradient(whitesmoke 0%, white 100%);
+}
+
+.btn {
+    margin: 5px;
+
+}
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+@keyframes checked-anim {
+    50% {
+        width: 3000px;
+        height: 3000px;
+    }
+    100% {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+}
+@keyframes not-checked-anim {
+    0% {
+        width: 3000px;
+        height: 3000px;
+    }
+}
+li {
+    margin: 75px 0 -55px 0;
+    color: white;
+    font: 40pt "Roboto", sans-serif;
+    font-weight: 100;
+    text-decoration: none;
+    text-transform: none;
+    list-style: none;
+    outline: 0;
+    display: none;
+}
+li {
+    width: 90%;
+    text-indent: 40px;
+}
+aside {
+    position: absolute;
+    color: white;
+    top: 35%;
+    right: 10%;
+    text-align: right;
+}
+html, body {
+    background-color: white;
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+}
+#trigger, #burger, #burger:before, #burger:after {
+    position: absolute;
+    top: 28px;
+    left: 28px;
+    background: darkred;
+    width: 32px;
+    height: 5px;
+    transition: .2s ease;
+    cursor: pointer;
+    z-index: 2;
+    border-radius: 3px;
+}
+#trigger {
+    height: 25px;
+    background: none;
+}
+#burger:before {
+    content: " ";
+    top: 10px;
+    left: 0;
+}
+#burger:after {
+    content: " ";
+    top: 20px;
+    left: 0;
+}
+#menu-toggle:checked + #trigger + #burger {
+    top: 35px;
+    transform: rotate(180deg);
+    transition: transform .2s ease;
+}
+#menu-toggle:checked + #trigger + #burger:before {
+    width: 20px;
+    top: -2px;
+    left: 18px;
+    transform: rotate(45deg) translateX(-5px);
+    transition: transform .2s ease;
+}
+#menu-toggle:checked + #trigger + #burger:after {
+    width: 20px;
+    top: 2px;
+    left: 18px;
+    transform: rotate(-45deg) translateX(-5px);
+    transition: transform .2s ease;
+}
+#menu {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 80px;
+    background-color: red;
+    opacity: 0.8;
+    /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);*/
+    animation: not-checked-anim .2s both;
+    transition: .2s;
+    z-index: 1;
+}
+#menu-toggle:checked + #trigger + #burger + #menu {
+    animation: checked-anim 1s ease both;
+}
+#menu-toggle:checked + #trigger ~ #menu > li, a {
+    display: block;
+}
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    display: none;
+}
+#showsContainer {
+    text-align: center;
+    width: 80%;
+    height: 750px;
+    overflow-y: scroll !important;
+}
+.moviesContainer {
+    float: right;
+    width: 92%;
+    height: 750px;
+    overflow-y: scroll !important;
+}
+#searchContainer {
+    float: right;
+    width: 92%;
+    overflow: hidden;
+}
+ul li h1 {
+    color: black;
+    display: inline;
+    width: 100%;
+    text-indent: 50vw;
+}
+
+
+.login-container {
+  width: 400px;
+  height: 500px;
+  background-color: white;
+  border-radius: 30px;
+}
+
+.searchLogin{
+  float: right;
+}
+
+.top-header {
+  padding: 45px;
+}
+
+.mix-shows-btn, .mix-movies-btn {
+  opacity: 0.8;
+  width: 200px;
+  height: 200px;
+  padding: 0 auto 0 auto;
+  margin: 0 50px 0 50px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 25px;
+  -webkit-transition: all .25s ease-in-out;
+  -o-transition: all .25s ease-in-out;
+  -moz-transition: all .25s ease-in-out;
+  transition: all .25s ease-in-out;
+  border-radius: 300px;
+  z-index: 3;
+  border: 1px solid whitesmoke;
+  background-color: whitesmoke;
+}
+
+.mix-shows-btn:hover, .mix-movies-btn:hover {
+  color: white;
+  background-color: red;
+  width: 200px;
+		height: 200px;
+		z-index: 4;
+		-webkit-transform: rotate(-360deg);
+		-moz-transform: rotate(-360deg);
+		-o-transform: rotate(-360deg);
+		transform: rotate(-360deg);
+}
+
+#mixForm {
+  text-align: center;
+  margin: 50px auto 50px auto;
+}
+
+.mix-title {
+  text-align: center;
+  font-size: 50px;
+  font-weight: 900;
+  opacity: 0.8;
+  color: red;
+
+
+}
+
+#mixContainer{
+  text-align: center;
+}
+
+#fav-logout{
+  float: right;
+}
+
+.welcome {
+  padding: 10px;
+  font-weight: 100px;
+  color: gray;
+  font-size: 20px;
+  text-align: center;
+  vertical-align: top;
+}
+
+.footer-logo {
+  float: right;
+}

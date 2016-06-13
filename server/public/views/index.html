@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+   <!-- Add Meta Data -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Streamix</title>
+
+    <!-- Application Styles-->
+    <link rel="stylesheet" href="/vendors/normalize.css" />
+    <link rel="stylesheet" href="/vendors/bootstrap.min.css" />
+    <link rel="stylesheet" href="/styles/style.css" />
+
+    <!-- Application Logic-->
+    <script src="/vendors/angular.min.js"></script>
+    <script type="text/javascript" src="/vendors/angular-route.min.js"></script>
+    <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+    <script src="/vendors/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/scripts/clientapp.js"></script>
+    <script type="text/javascript" src="/scripts/controllers/MixController.js"></script>
+    <script type="text/javascript" src="/scripts/controllers/SearchController.js"></script>
+    <script type="text/javascript" src="/scripts/controllers/LoginController.js"></script>
+    <script type="text/javascript" src="/scripts/controllers/FavoritesController.js"></script>
+
+</head>
+
+<body ng-app="myApp">
+
+
+    <nav ng-include="'../views/templates/nav.html'"></nav>
+
+    <header ng-include="'../views/templates/header.html'"></header>
+
+    <main ng-view></main>
+
+
+</body>
+
+</html>

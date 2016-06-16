@@ -16,7 +16,14 @@ myApp.controller('SearchController', ['$scope', '$http', '$window', '$location',
                 }
                 console.log($scope.show);
                 console.log(encodeURIComponent($scope.showInput));
+                $scope.loading = false;
+                $scope.top = true;
+                $scope.toptoo = false;
+
+
             });
+            $scope.loading = true;
+
     };
 
     $scope.searchMovie = function() {
@@ -30,7 +37,14 @@ myApp.controller('SearchController', ['$scope', '$http', '$window', '$location',
                 }
                 console.log($scope.movie);
                 console.log(encodeURIComponent($scope.movieInput));
+                $scope.loading = false;
+                $scope.toptoo = true;
+                $scope.top = false;
+
+
             });
+            $scope.loading = true;
+
     };
 
     //- - - - - - - Must Watch Favorite Functionality - - - - - - -  //
@@ -54,7 +68,6 @@ myApp.controller('SearchController', ['$scope', '$http', '$window', '$location',
         currentContent.rating = $scope.movie.rating;
         currentContent.releaseYear = $scope.movie.release_year;
         currentContent.image = $scope.movie.poster_120x171;
-        currentContent.image = $scope.show.artwork_208x117;
         currentContent.watchLink = $scope.show.tvrage.link;
         currentContent.learnLink = $scope.show.wikipedia_id;
 

@@ -1,43 +1,120 @@
-<div class="row">
-    <!-- <div class="col-xs-11"></div> -->
-    <div class="col-xs-12">
-      <button class="btn btn-default" id="fav-logout" ng-click="logout()">Log Out</button>
+<div class="row logo">
+  <div class="col-xs-12">
+    <h1 class="title-logo">streamix</h1>
+  </div>
+</div>
+<div class="row header-two">
+    <div class="col-xs-2">
+        <h6 class="welcome" ng-show="loggedIn"></h6>
+    </div>
+    <div class="col-xs-8"></div>
+    <div class="col-xs-2">
+        <button ng-hide="loggedIn" class="btn searchLogin" data-toggle="modal" id="fav-login" data-target="#loginModal">Login</button>
+        <button ng-show="loggedIn" class="btn searchLogin" id="fav-logout-too" ng-click="logout()">Logout</button>
     </div>
 </div>
 
 <div class="row">
 <div class="col-xs-12">
-  <h1 class="welcome" class="lead">Hey, {{userName}}! Here are all your favorites.</h1>
+  <h1 ng-show="loggedIn" class="welcome" class="lead">Hey, {{userName}}! Here are all your favorites.</h1>
+  <h1 ng-hide="loggedIn" class="welcome">Please login to view favorites.</h1>
 </div>
 </div>
 
+
 <div>
   <ul id="showFavoritesList">
-    <table class="table table-hover">
+    <table ng-show="loggedIn" class="table table-hover">
         <thead>
             <tr>
-                <th>Series Title</th>
-                <th>Poster</th>
-                <th>Links</th>
-                <th></th>
+                <th class="poster">Poster</th>
+                <th class="title"> Title</th>
+                <th class="links">Links</th>
+                <th class="favorite">Delete</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="favorite in favorite">
-                <td>{{favorite.title}}</td>
-                <td><img src="{{favorite.image}}" /></td>
-                <td>
-                    <a href="https://en.wikipedia.org/?curid={{favorite.wikipedia_id}}" target="_blank">
-                        <button class="btn btn-danger">Learn More</button>
+            <tr ng-repeat="favorite in favorite" class="favorite-row">
+              <td class="poster"><img src="{{favorite.image}}" /></td>
+
+                <td class="title">{{favorite.title}}</td>
+                <td class="links">
+                    <a href="https://en.wikipedia.org/?curid={{favorite.wikipedia_id}}" target="_blank" class="mix-link">
+                        <button class="btn">Learn More</button>
                     </a>
-                    <a href="{{favorite.tvrage.link}}" target="_blank">
-                        <button class="btn btn-danger">Watch Episodes</button>
+                    <a href="{{favorite.tvrage.link}}" target="_blank" class="mix-link">
+                        <button class="btn">Watch Episodes</button>
                     </a>
                 </td>
-                <td>
-                  <button class="btn btn-danger" ng-click="deleteFavorite(favorite._id)">Delete</button>
+                <td class=favorite>
+                  <a class="mix-link">
+                    <button class="btn" ng-click="deleteFavorite(favorite._id)">Delete</button>
+                  </a>
                 </td>
             </tr>
         </tbody>
     </table>
 <div>
+
+
+  <div class="modal fade" id="loginModal" role="dialog">
+      <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title">Login</h3>
+              </div>
+              <div class="modal-body">
+                  <h1 class="lead alert alert-danger" role="alert" ng-if="message != ''">{{message}}</h2>
+                <form ng-submit="login()">
+                  <div>
+                      <input class="username" type="text" ng-model="user.username" placeholder="Username" />
+                  </div>
+                  <div>
+                      <input class="password" type="password" ng-model="user.password" placeholder="Password"/>
+                  </div>
+                  <div>
+                      <input class="btn btn-danger" type="submit" name="submit" value="Submit" />
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="btn" data-toggle="modal" data-target="#registerModal">Register</button>
+              </div>
+          </div>
+
+
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="registerModal" role="dialog">
+    <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title">Register</h3>
+              </div>
+              <div class="modal-body">
+                <h1 class="lead alert alert-danger" role="alert" ng-if="message != ''">{{message}}</h2>
+                <form ng-submit="registerUser()">
+                  <div>
+                      <input class="username" type="text" ng-model="user.username" placeholder="Username" />
+                  </div>
+                  <div>
+                      <input class="password" type="password" ng-model="user.password" placeholder="Password" />
+                  </div>
+                  <input class="btn btn-danger" type="submit" name="submit" value="Register" />
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              </div>
+          </div>
+
+    </div>
+  </div>

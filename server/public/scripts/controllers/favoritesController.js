@@ -5,6 +5,7 @@ myApp.controller('FavoritesController', ['$scope', '$http', '$window', '$locatio
         if (response.data.username) {
             $scope.userName = response.data.username;
             console.log('User Data: ', $scope.userName);
+            $scope.loggedIn = true;
         } else {
             $location.path("/favorites");
         }
@@ -13,10 +14,15 @@ myApp.controller('FavoritesController', ['$scope', '$http', '$window', '$locatio
     $scope.logout = function() {
         $http.get('/user/logout').then(function(response) {
             console.log('logged out');
-            $location.path("/home");
+            $location.path("/favorites");
         });
     }
 
+    $scope.user = {
+      username: '',
+      password: ''
+    };
+    $scope.message = '';
 
 $scope.userName = '';
 // This happens after view/controller loads -- not ideal
@@ -66,6 +72,22 @@ $scope.login = function() {
         console.log('failure: ', response);
         $scope.message = "Wrong!!";
       }
+    });
+  }
+}
+
+$scope.registerUser = function() {
+  if($scope.user.username == '' || $scope.user.password == '') {
+    $scope.message = "Choose a username and password!";
+  } else {
+    console.log('sending to server...', $scope.user);
+    $http.post('/register', $scope.user).then(function(response) {
+      console.log('success');
+      $location.path('/login');
+    },
+    function(response) {
+      console.log('error');
+      $scope.message = "Please try again."
     });
   }
 }

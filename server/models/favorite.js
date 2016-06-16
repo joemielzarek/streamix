@@ -6,7 +6,7 @@ var FavoriteSchema = new Schema({
         type: String,
         required: true,
         index: {
-            unique: true
+          unique: true
         }
     },
     image: {

@@ -1,68 +1,85 @@
-<div class="row">
+<div class="row logo">
+  <div class="col-xs-12">
+    <h1 class="title-logo">streamix</h1>
+  </div>
+</div>
+
+<div class="row header-two">
     <div class="col-xs-2">
         <h6 class="welcome" ng-show="loggedIn">Welcome, {{userName}}!</h6>
     </div>
     <div class="col-xs-8"></div>
     <div class="col-xs-2">
-        <button ng-hide="loggedIn" class="btn searchLogin" data-toggle="modal" data-target="#loginModal">Login</button>
-        <button ng-show="loggedIn" class="btn btn-default" id="fav-logout" ng-click="logout()">Log Out</button>
+        <button ng-hide="loggedIn" class="btn searchLogin" data-toggle="modal" id="fav-login" data-target="#loginModal">Login</button>
+        <button ng-show="loggedIn" class="btn btn-default" id="fav-logout" ng-click="logout()">Logout</button>
     </div>
 </div>
 
 
 <div class="row">
-  <div class="col-xs-4">
-    <div class="hidden">
+    <div class="col-xs-4">
+        <div class="hidden">
 
+        </div>
     </div>
-  </div>
-  <div id="searchContainer" class="col-xs-3" center-block>
-    <h2>Search by Title</h2>
-      <form id='searchShowsForm'>
-        <input type="text" name="tags" placeholder="Search TV Shows" ng-model="showInput" required></input>
-        <button class="btn btn-danger" type="submit" ng-click="searchShow()">Go</button>
-      </form>
-      <form id='searchMoviesForm'>
-        <input type="text" name="tags" placeholder="Search Movies" ng-model="movieInput" required></input>
-        <button class="btn btn-danger" type="submit" ng-click="searchMovie()">Go</button>
-      </form>
-  </div>
-  <div class="col-xs-2"></div>
-  <div class="col-xs-3"></div>
+    <div id="searchContainer" class="col-xs-3" center-block>
+        <h2>Search by Title</h2>
+        <form id='searchShowsForm'>
+            <input type="text" name="tags" placeholder="Search TV Shows" ng-model="showInput" required></input>
+            <button class="btn btn-danger" type="submit" ng-click="searchShow()">Go</button>
+
+        </form>
+        <form id='searchMoviesForm'>
+            <input type="text" name="tags" placeholder="Search Movies" ng-model="movieInput" required></input>
+            <button class="btn btn-danger" type="submit" ng-click="searchMovie()">Go</button>
+
+        </form>
+    </div>
+    <div class="col-xs-3"></div>
+    <div class="col-xs-2"></div>
 </div>
 
 <div class="row">
-  <div class="col-xs-1">
-    <div class="hidden"></div>
-  </div>
+    <div class="col-xs-1">
+        <div class="hidden"></div>
+    </div>
 
-    <div id="showsContainer" class="col-xs-10" ng-show="showResults">
-        <h2>{{show.length}} show results for "{{showInput}}"</h2>
-        <table class="table table-hover">
+    <div id="showsContainer" class="col-xs-10" ng-show="showResults && top">
+      <div ng-show="loading" class="loader loader--style2" title="1">
+          <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+              <path fill="#000" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
+                  <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite" />
+              </path>
+          </svg>
+      </div>
+
+        <h2 ng-hide="loading">{{show.length}} show results for "{{showInput}}"</h2>
+        <table ng-hide="loading" class="table table-hover">
             <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>First Air Date</th>
-                    <th>Poster</th>
-                    <th>Links</th>
-                    <th></th>
+                    <th class="poster">Poster</th>
+                    <th class="title">Title</th>
+                    <th class="airdate">First Air Date</th>
+                    <th class="links">Links</th>
+                    <th class="favorite">Favorite</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="showsTable">
                 <tr ng-repeat="results in show">
-                    <td>{{results.title}}</td>
-                    <td>{{results.first_aired}}</td>
-                    <td><img src="{{results.artwork_448x252}}" /></td>
-                    <td>
-                        <a href="https://en.wikipedia.org/?curid={{results.wikipedia_id}}" target="_blank">
-                            <button class="btn btn-danger">Learn More</button>
+                  <td class="poster"><img src="{{results.artwork_448x252}}" /></td>
+                    <td class="title">{{results.title}}</td>
+                    <td class="airdate">{{results.first_aired}}</td>
+                    <td class="links">
+                        <a href="https://en.wikipedia.org/?curid={{results.wikipedia_id}}" target="_blank" class="mix-link">
+                            <button class="btn">Learn More</button>
                         </a>
-                        <a href="{{results.tvrage.link}}" target="_blank">
-                            <button class="btn btn-danger">Watch Episodes</button>
+                        <a href="{{results.tvrage.link}}" target="_blank" class="mix-link">
+                            <button class="btn">Watch Episodes</button>
                         </a>
                     </td>
-                    <td>
-                        <button class="btn btn-danger btn-md" ng-click="addFavoriteShow()">Favorite</button>
+                    <td class="favorite">
+                        <a class="mix-link">
+                        <button ng-show="loggedIn" class="btn" ng-click="addFavoriteShow()">Favorite</button></a>
                     </td>
                 </tr>
             </tbody>
@@ -70,115 +87,119 @@
     </div>
 
     <div class="col-xs-1">
-      <div class="hidden"></div>
+        <div class="hidden"></div>
     </div>
 
 </div>
 
-    <div class="moviesContainer" ng-show="movieResults">
-        <h2>{{movie.length}} movie results for "{{movieInput}}"</h2>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Poster</th>
-                    <th>Title</th>
-                    <th>Rating</th>
-                    <th>Release Date</th>
-                    <th>Links</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="results in movie">
-                    <td><img src="{{results.poster_240x342}}" /></td>
-                    <td>{{results.title}}</td>
-                    <td>{{results.rating}}</td>
-                    <td>{{results.release_date}}</td>
-                    <td>
-                        <a href="http://www.rottentomatoes.com/m/{{movie.rottentomatoes}}" target="_blank">
-                            <button class="btn btn-danger">Check Tomatoes</button>
-                        </a>
-                        <a href="http://www.imdb.com/title/{{movie.imdb}}" target="_blank">
-                            <button class="btn btn-danger">IMDB</button>
-                        </a>
-                        <a href="https://en.wikipedia.org/?curid={{movie.wikipedia_id}}" target="_blank">
-                            <button class="btn btn-danger">Learn More</button>
-                        </a>
-                        <a href="http://www.guidebox.com/choose_source_movie.php?movie_id={{movie.id}}" target="_blank">
-                            <button class="btn btn-danger">Viewing Links</button>
-                        </a>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger btn-md" ng-click="addFavoriteMovie()">Favorite</button>
-                    </td>
-
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-
-    <div class="modal fade" id="loginModal" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h3 class="modal-title">Login</h3>
-                </div>
-                <div class="modal-body">
-                    <h1 class="lead alert alert-danger" role="alert" ng-if="message != ''">{{message}}</h2>
-              <form ng-submit="login()">
-                <div>
-                    <label for="username">Username:</label>
-                    <input type="text" ng-model="user.username" />
-                </div>
-                <div>
-                    <label for="password">Password:</label>
-                    <input type="password" ng-model="user.password" />
-                </div>
-                <div>
-                    <input class="btn btn-default" type="submit" name="submit" value="Log In" />
-                </div>
-              </form>
-
-
-            </div>
-            <div class="modal-footer">
-              <button class="btn" data-toggle="modal" data-target="#registerModal">Register</button>
-            </div>
-          </div>
-
-
+<div class="moviesContainer" ng-show="movieResults && toptoo">
+  <div ng-show="loading" class="loader loader--style2" title="1">
+      <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+          <path fill="#000" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
+              <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite" />
+          </path>
+      </svg>
   </div>
+    <h2>{{movie.length}} movie results for "{{movieInput}}"</h2>
+    <table ng-hide="loading" class="table table-hover">
+        <thead>
+            <tr>
+                <th class="poster">Poster</th>
+                <th class="title">Title</th>
+                <th class="title">Rating</th>
+                <th class="airdate">Release Date</th>
+                <th class="links">Links</th>
+                <th class="favorite"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="results in movie">
+                <td class="poster"><img src="{{results.poster_240x342}}" /></td>
+                <td class="title">{{results.title}}</td>
+                <td class="title">{{results.rating}}</td>
+                <td class="airdate">{{results.release_date}}</td>
+                <td class="links">
+                    <a href="http://www.rottentomatoes.com/m/{{movie.rottentomatoes}}" target="_blank" >
+                        <button class="btn">Check Tomatoes</button>
+                    </a>
+                    <a href="http://www.imdb.com/title/{{movie.imdb}}" target="_blank">
+                        <button class="btn">IMDB</button>
+                    </a>
+                    <a href="https://en.wikipedia.org/?curid={{movie.wikipedia_id}}" target="_blank" >
+                        <button class="btn">Learn More</button>
+                    </a>
+                    <a href="http://www.guidebox.com/choose_source_movie.php?movie_id={{movie.id}}" target="_blank">
+                        <button class="btn">Viewing Links</button>
+                    </a>
+                </td>
+                <td class="favorite">
+                    <a><button ng-show="loggedIn" class="btn" ng-click="addFavoriteMovie()">Favorite</button></a>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
 </div>
 
-<div class="modal fade" id="registerModal" role="dialog">
-  <div class="modal-dialog">
+
+<div class="modal fade" id="loginModal" role="dialog">
+    <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title">Register</h3>
+                <h3 class="modal-title">Login</h3>
             </div>
             <div class="modal-body">
-              <h1 class="lead alert alert-danger" role="alert" ng-if="message != ''">{{message}}</h2>
-              <form ng-submit="registerUser()">
-                <div>
-                    <label for="username">Username:</label>
-                    <input type="text" ng-model="user.username" />
+                <h1 class="lead alert alert-danger" role="alert" ng-if="message != ''">{{message}}</h2>
+                  <form ng-submit="login()">
+                    <div>
+                        <input class="username" type="text" ng-model="user.username" placeholder="Username" />
+                    </div>
+                    <div>
+                        <input class="password" type="password" ng-model="user.password" placeholder="Password"/>
+                    </div>
+                    <div>
+                        <input class="btn btn-danger" type="submit" name="submit" value="Submit" />
+                    </div>
+                  </form>
                 </div>
-                <div>
-                    <label for="password">Password:</label>
-                    <input type="password" ng-model="user.password" />
+                <div class="modal-footer">
+                  <button class="btn" data-toggle="modal" data-target="#registerModal">Register</button>
                 </div>
-                <input class="btn btn-default" type="submit" name="submit" value="Register" />
-              </form>
             </div>
-            <div class="modal-footer"></div>
-        </div>
 
-  </div>
-</div>
+
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="registerModal" role="dialog">
+      <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Register</h3>
+                </div>
+                <div class="modal-body">
+                  <h1 class="lead alert alert-danger" role="alert" ng-if="message != ''">{{message}}</h2>
+                  <form ng-submit="registerUser()">
+                    <div>
+                        <input class="username" type="text" ng-model="user.username" placeholder="Username" />
+                    </div>
+                    <div>
+                        <input class="password" type="password" ng-model="user.password" placeholder="Password" />
+                    </div>
+                    <input class="btn btn-danger" type="submit" name="submit" value="Register" />
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+
+      </div>
+    </div>

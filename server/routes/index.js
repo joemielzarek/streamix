@@ -5,10 +5,10 @@ var path = require('path');
 
 // Handles login form POST from index.html
 router.post('/',
-    passport.authenticate('local', {
+    exports.login = passport.authenticate('local', {
         successRedirect: '/user',
         failureRedirect: '/'
-    })
+    });
 );
 
 // Handle index file separately

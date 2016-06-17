@@ -45,13 +45,12 @@ app.use('/', index);
 //------------ Database Connection ------------//
 var databaseURI = '';
 
-// process.env.MONGODB_URI will only be defined if you
-// are running on Heroku
+// process.env.MONGODB_URI will only be defined if running on Heroku
 if(process.env.MONGODB_URI != undefined) {
     // use the string value of the environment variable
     databaseURI = process.env.MONGODB_URI;
 } else {
-    // use the local database server
+    // local database server
     databaseURI = 'mongodb://localhost:27017/streamix';
 }
 

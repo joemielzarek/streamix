@@ -43,7 +43,7 @@ app.use('/', index);
 
 
 //------------ Database Connection ------------//
-var databaseURI = 'mongodb://joe:joe@ds015334.mlab.com:15334/heroku_cpv005sw';
+var databaseURI = 'mongodb://joe:joe@ds017544.mlab.com:17544/heroku_zj43qmdf';
 
 // var databaseURI = 'mongodb://localhost:27017/streamix';
 

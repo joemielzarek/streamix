@@ -14,7 +14,7 @@ myApp.controller('FavoritesController', ['$scope', '$http', '$window', '$locatio
     $scope.logout = function() {
         $http.get('/user/logout').then(function(response) {
             console.log('logged out');
-            $location.path("/favorites");
+            $location.path("/home");
         });
     }
 
@@ -67,7 +67,10 @@ $scope.login = function() {
       if(response.data.username) {
         console.log('success: ', response.data);
         // location works with SPA (ng-route)
-        $location.path('/favorites');
+        $location.path('/home');
+        $scope.close = true;
+        $('#loginModal').modal('hide');
+
       } else {
         console.log('failure: ', response);
         $scope.message = "Wrong!!";
@@ -83,7 +86,10 @@ $scope.registerUser = function() {
     console.log('sending to server...', $scope.user);
     $http.post('/register', $scope.user).then(function(response) {
       console.log('success');
-      $location.path('/login');
+      $location.path('/favorites');
+      $scope.close = true;
+      $('#registerModal').modal('hide');
+
     },
     function(response) {
       console.log('error');

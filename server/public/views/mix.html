@@ -97,7 +97,7 @@
 
 
 <div class="modal fade" id="movieModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" >
 
         <!-- Modal content-->
         <div class="modal-content">
@@ -165,8 +165,8 @@
 </div>
 
 
-<div class="modal fade" id="loginModal" role="dialog" ng-hide="success">
-    <div class="modal-dialog">
+<div class="modal fade" id="loginModal" role="dialog" ng-hide="success || close">
+    <div class="modal-dialog" >
 
         <!-- Modal content-->
         <div class="modal-content">
@@ -198,8 +198,8 @@
 </div>
 
 
-<div class="modal fade" id="registerModal" role="dialog" ng-hide="success">
-  <div class="modal-dialog">
+<div class="modal fade" id="registerModal" role="dialog" ng-hide="success || close">
+  <div class="modal-dialog" ng-hide="close">
 
         <!-- Modal content-->
         <div class="modal-content">

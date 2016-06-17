@@ -155,6 +155,8 @@ myApp.controller('MixController', ['$scope', '$http', '$window', '$location', fu
                     // location works with SPA (ng-route)
                     $location.path('/home');
                     $scope.loggedIn = true;
+                    // $scope.close = true;
+                    $('#loginModal').modal('hide');
 
                 } else {
                     console.log('failure: ', response);
@@ -173,6 +175,8 @@ myApp.controller('MixController', ['$scope', '$http', '$window', '$location', fu
                     console.log('success');
                     $location.path('/mix');
                     $scope.success = true;
+                    $scope.close = true;
+                    $('#registerModal').modal('hide');
                 },
                 function(response) {
                     console.log('error');

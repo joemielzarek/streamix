@@ -8,7 +8,7 @@ router.post('/',
     exports.login = passport.authenticate('local', {
         successRedirect: '/user',
         failureRedirect: '/'
-    });
+    })
 );
 
 // Handle index file separately

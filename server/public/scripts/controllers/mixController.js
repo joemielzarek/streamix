@@ -206,6 +206,8 @@ myApp.controller('MixController', ['$scope', '$http', '$window', '$location', fu
                     // .fadeIn(fadeSpeed);
             })(word);
         }
+
+
     });
 
 }]);

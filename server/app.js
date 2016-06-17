@@ -43,18 +43,12 @@ app.use('/', index);
 
 
 //------------ Database Connection ------------//
-var databaseURI = '';
+var databaseURI = 'mongodb://joe:joe@ds015334.mlab.com:15334/heroku_cpv005sw';
 
-// process.env.MONGODB_URI will only be defined if running on Heroku
-if(process.env.MONGODB_URI != undefined) {
-    // use the string value of the environment variable
-    databaseURI = process.env.MONGODB_URI;
-} else {
-    // local database server
-    databaseURI = 'mongodb://localhost:27017/streamix';
-}
+// var databaseURI = 'mongodb://localhost:27017/streamix';
 
 
+console.log('DB: ', databaseURI);
 mongoose.connect(databaseURI);
 
 mongoose.connection.on('connected', function() {

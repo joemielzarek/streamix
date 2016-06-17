@@ -22,7 +22,7 @@ myApp.controller('MixController', ['$scope', '$http', '$window', '$location', fu
         $scope.moreInfo = false;
 
 
-        $http.get('http://api-public.guidebox.com/v1.43/US/rK4sScT4OGdI8lVl' +
+        $http.get('https://api-public.guidebox.com/v1.43/US/rK4sScT4OGdI8lVl' +
                 'wAkOzOI5DWLeHqUp/shows/all/' + showsPage + '/10/free/all')
             .then(function(response) {
 
@@ -33,7 +33,7 @@ myApp.controller('MixController', ['$scope', '$http', '$window', '$location', fu
                 $scope.loading = false;
 
                 $scope.moreShowInfo = function() {
-                    $http.get('http://api-public.guidebox.com/v1.43/US/rK4sScT4OGdI8lVl' +
+                    $http.get('https://api-public.guidebox.com/v1.43/US/rK4sScT4OGdI8lVl' +
                             'wAkOzOI5DWLeHqUp/show/' + $scope.show.id)
                         .then(function(response) {
                             $scope.moreShow = response.data;
@@ -54,7 +54,7 @@ myApp.controller('MixController', ['$scope', '$http', '$window', '$location', fu
         console.log(moviesPage);
         $scope.moreInfo = false;
 
-        $http.get('http://api-public.guidebox.com/v1.43/US/rK4sScT4OGdI8lVl' +
+        $http.get('https://api-public.guidebox.com/v1.43/US/rK4sScT4OGdI8lVl' +
                 'wAkOzOI5DWLeHqUp/movie/all/' + moviesPage + '/10/free/all')
             .then(function(response) {
                 $scope.movie = response.data.results[randomIndex];
@@ -62,7 +62,7 @@ myApp.controller('MixController', ['$scope', '$http', '$window', '$location', fu
                 $scope.loading = false;
 
                 $scope.moreShowInfo = function() {
-                    $http.get('http://api-public.guidebox.com/v1.43/US/rK4sScT4OGdI8lVl' +
+                    $http.get('https://api-public.guidebox.com/v1.43/US/rK4sScT4OGdI8lVl' +
                             'wAkOzOI5DWLeHqUp/movie/' + $scope.movie.id)
                         .then(function(response) {
                             $scope.moreMovie = response.data;

@@ -48,37 +48,44 @@ myApp.controller('SearchController', ['$scope', '$http', '$window', '$location',
     };
 
     //- - - - - - - Must Watch Favorite Functionality - - - - - - -  //
-    $scope.addFavoriteShow = function() {
-        currentContent.title = $scope.show.title;
-        currentContent.image = $scope.show.artwork_208x117;
-        currentContent.watchLink = $scope.show.tvrage.link;
-        currentContent.learnLink = $scope.show.wikipedia_id;
+    $scope.addFavoriteShow = function(results) {
+      console.log(results);
+        currentContent.contentID = results.id;
+        currentContent.title = results.title;
+        currentContent.image = results.artwork_208x117;
+        currentContent.watchLink = results.tvrage.link;
+        currentContent.learnLink = results.wikipedia_id;
+        currentContent.user = $scope.userName;
+
+        console.log(currentContent);
+
+
+        $http.post('/favorites', currentContent)
+            .then(function() {
+                console.log('POST /favorites');
+            });
+    };
+
+    $scope.addFavoriteMovie = function(results) {
+        var watchID = 'http://www.guidebox.com/choose_source_movie.php?movie_id=';
+        var tomatoesID = 'http://www.rottentomatoes.com/m/';
+        currentContent.title = results.original_title;
+        currentContent.rating = results.rating;
+        currentContent.releaseYear = results.release_year;
+        currentContent.image = results.poster_120x171;
+        currentContent.watchLink = watchID + results.id;
+        currentContent.learnLink = results.wikipedia_id;
+        currentContent.tomates = tomatoesID + results.rottentomatoes;
+        currentContent.user = $scope.userName;
 
         console.log(currentContent);
 
         $http.post('/favorites', currentContent)
             .then(function() {
                 console.log('POST /favorites');
-                getFavorites();
             });
     };
 
-    $scope.addFavoriteMovie = function() {
-        currentContent.title = $scope.movie.title;
-        currentContent.rating = $scope.movie.rating;
-        currentContent.releaseYear = $scope.movie.release_year;
-        currentContent.image = $scope.movie.poster_120x171;
-        currentContent.watchLink = $scope.show.tvrage.link;
-        currentContent.learnLink = $scope.show.wikipedia_id;
-
-        console.log(currentContent);
-
-        $http.post('/favorites', currentContent)
-            .then(function() {
-                console.log('POST /favorites');
-                getFavorites();
-            });
-    };
 
 
     //- - - - - - - User Authentication Functionality - - - - - - -  //
@@ -96,7 +103,7 @@ myApp.controller('SearchController', ['$scope', '$http', '$window', '$location',
     $scope.logout = function() {
         $http.get('/user/logout').then(function(response) {
             console.log('logged out');
-            $location.path("/search");
+            $location.path("/home");
         });
     };
 
@@ -115,7 +122,10 @@ myApp.controller('SearchController', ['$scope', '$http', '$window', '$location',
           if(response.data.username) {
             console.log('success: ', response.data);
             // location works with SPA (ng-route)
-            $location.path('/mix');
+            $location.path('/home');
+            $('#loginModal').modal('hide');
+            $scope.loggedIn = true;
+
           } else {
             console.log('failure: ', response);
             $scope.message = "Wrong!!";
@@ -131,7 +141,11 @@ myApp.controller('SearchController', ['$scope', '$http', '$window', '$location',
         console.log('sending to server...', $scope.user);
         $http.post('/register', $scope.user).then(function(response) {
           console.log('success');
-          $location.path('/mix');
+          $location.path('/search');
+          $scope.success = true;
+          $scope.close = true;
+          $('#registerModal').modal('hide');
+
         },
         function(response) {
           console.log('error');

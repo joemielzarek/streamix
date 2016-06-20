@@ -30,7 +30,7 @@
                 <th class="poster">Poster</th>
                 <th class="title"> Title</th>
                 <th class="links">Links</th>
-                <th class="favorite">Delete</th>
+                <th class="favorite"></th>
             </tr>
         </thead>
         <tbody>
@@ -39,16 +39,19 @@
 
                 <td class="title">{{favorite.title}}</td>
                 <td class="links">
-                    <a href="https://en.wikipedia.org/?curid={{favorite.wikipedia_id}}" target="_blank" class="mix-link">
-                        <button class="btn">Learn More</button>
+                    <a ng-hide="movie" href="https://en.wikipedia.org/?curid={{favorite.learnLink}}" target="_blank" class="mix-link">
+                        <button class="btn btn-default">Learn More</button>
                     </a>
-                    <a href="{{favorite.tvrage.link}}" target="_blank" class="mix-link">
-                        <button class="btn">Watch Episodes</button>
+                    <a ng-show="movie" href="{{favorite.learnLink}}" target="_blank" class="mix-link">
+                        <button class="btn btn-default">Learn More</button>
+                    </a>
+                    <a href="{{favorite.watchLink}}" target="_blank" class="mix-link">
+                        <button class="btn btn-default">Watch</button>
                     </a>
                 </td>
                 <td class=favorite>
                   <a class="mix-link">
-                    <button class="btn" ng-click="deleteFavorite(favorite._id)">Delete</button>
+                    <button class="btn btn-default" ng-click="deleteFavorite(favorite._id)">Delete</button>
                   </a>
                 </td>
             </tr>

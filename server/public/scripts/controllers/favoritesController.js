@@ -47,6 +47,9 @@ function getFavorites() {
             $scope.favorite = response.data;
             console.log('got the faves, man!');
             console.log($scope.favorite);
+            if ($scope.favorite.rating) {
+              $scope.movie=true;
+            }
         })
 
 }

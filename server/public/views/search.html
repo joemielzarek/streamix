@@ -11,7 +11,7 @@
     <div class="col-xs-8"></div>
     <div class="col-xs-2">
         <button ng-hide="loggedIn" class="btn searchLogin" data-toggle="modal" id="fav-login" data-target="#loginModal">Login</button>
-        <button ng-show="loggedIn" class="btn btn-default" id="fav-logout" ng-click="logout()">Logout</button>
+        <button ng-show="loggedIn" class="btn searchLogin" id="fav-logout" ng-click="logout()">Logout</button>
     </div>
 </div>
 
@@ -25,13 +25,13 @@
     <div id="searchContainer" class="col-xs-3" center-block>
         <h2>Search by Title</h2>
         <form id='searchShowsForm'>
-            <input type="text" name="tags" placeholder="Search TV Shows" ng-model="showInput" required></input>
-            <button class="btn btn-danger" type="submit" ng-click="searchShow()">Go</button>
+            <input id="search" type="text" name="tags" placeholder="Search TV Shows" ng-model="showInput" required autofocus>
+            <button class="btn btn-danger" id="go" type="submit" ng-click="searchShow()">Go</button>
 
         </form>
         <form id='searchMoviesForm'>
-            <input type="text" name="tags" placeholder="Search Movies" ng-model="movieInput" required></input>
-            <button class="btn btn-danger" type="submit" ng-click="searchMovie()">Go</button>
+            <input id="search" type="text" name="tags" placeholder="Search Movies" ng-model="movieInput" required></input>
+            <button class="btn btn-danger" id="go" type="submit" ng-click="searchMovie()">Go</button>
 
         </form>
     </div>
@@ -43,15 +43,15 @@
     <div class="col-xs-1">
         <div class="hidden"></div>
     </div>
-
+    <div ng-show="loading" class="loader loader--style2" title="1">
+        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+            <path fill="#000" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
+                <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite" />
+            </path>
+        </svg>
+    </div>
     <div id="showsContainer" class="col-xs-10" ng-show="showResults && top">
-      <div ng-show="loading" class="loader loader--style2" title="1">
-          <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-              <path fill="#000" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
-                  <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite" />
-              </path>
-          </svg>
-      </div>
+
 
         <h2 ng-hide="loading">{{show.length}} show results for "{{showInput}}"</h2>
         <table ng-hide="loading" class="table table-hover">
@@ -61,7 +61,7 @@
                     <th class="title">Title</th>
                     <th class="airdate">First Air Date</th>
                     <th class="links">Links</th>
-                    <th class="favorite">Favorite</th>
+                    <th class="favorite"></th>
                 </tr>
             </thead>
             <tbody class="showsTable">
@@ -71,15 +71,15 @@
                     <td class="airdate">{{results.first_aired}}</td>
                     <td class="links">
                         <a href="https://en.wikipedia.org/?curid={{results.wikipedia_id}}" target="_blank" class="mix-link">
-                            <button class="btn">Learn More</button>
+                            <button class="btn btn-default">Learn More</button>
                         </a>
                         <a href="{{results.tvrage.link}}" target="_blank" class="mix-link">
-                            <button class="btn">Watch Episodes</button>
+                            <button class="btn btn-default">Watch Episodes</button>
                         </a>
                     </td>
                     <td class="favorite">
                         <a class="mix-link">
-                        <button ng-show="loggedIn" class="btn" ng-click="addFavoriteShow(results)">Favorite</button></a>
+                        <button ng-show="loggedIn" class="btn btn-default" ng-click="addFavoriteShow(results)">Favorite</button></a>
                     </td>
                 </tr>
             </tbody>
@@ -93,13 +93,7 @@
 </div>
 
 <div class="moviesContainer" ng-show="movieResults && toptoo">
-  <div ng-show="loading" class="loader loader--style2" title="1">
-      <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-          <path fill="#000" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z">
-              <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite" />
-          </path>
-      </svg>
-  </div>
+
     <h2>{{movie.length}} movie results for "{{movieInput}}"</h2>
     <table ng-hide="loading" class="table table-hover">
         <thead>
@@ -119,21 +113,21 @@
                 <td class="title">{{results.rating}}</td>
                 <td class="airdate">{{results.release_date}}</td>
                 <td class="links">
-                    <a href="http://www.rottentomatoes.com/m/{{movie.rottentomatoes}}" target="_blank" >
-                        <button class="btn">Check Tomatoes</button>
+                    <a href="http://www.rottentomatoes.com/m/{{results.rottentomatoes}}" target="_blank" >
+                        <button class="btn btn-default" id="button">Check Tomatoes</button>
                     </a>
-                    <a href="http://www.imdb.com/title/{{movie.imdb}}" target="_blank">
-                        <button class="btn">IMDB</button>
+                    <a href="http://www.imdb.com/title/{{results.imdb}}" target="_blank">
+                        <button class="btn btn-default" id="button">IMDB</button>
                     </a>
-                    <a href="https://en.wikipedia.org/?curid={{movie.wikipedia_id}}" target="_blank" >
-                        <button class="btn">Learn More</button>
+                    <a href="https://en.wikipedia.org/?curid={{results.wikipedia_id}}" target="_blank" >
+                        <button class="btn btn-default" id="button">Learn More</button>
                     </a>
-                    <a href="http://www.guidebox.com/choose_source_movie.php?movie_id={{movie.id}}" target="_blank">
-                        <button class="btn">Viewing Links</button>
+                    <a href="http://www.guidebox.com/choose_source_movie.php?movie_id={{results.id}}" target="_blank">
+                        <button class="btn btn-default" id="button">Viewing Links</button>
                     </a>
                 </td>
                 <td class="favorite">
-                    <a><button ng-show="loggedIn" class="btn" ng-click="addFavoriteMovie(results)">Favorite</button></a>
+                    <a><button ng-show="loggedIn" class="btn btn-default" ng-click="addFavoriteMovie(results)">Favorite</button></a>
                 </td>
 
             </tr>

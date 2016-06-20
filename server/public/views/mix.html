@@ -13,8 +13,8 @@
         </div>
         <div class="col-xs-8"></div>
         <div class="col-xs-2">
-            <button ng-hide="loggedIn" class="btn searchLogin" data-toggle="modal" id="fav-login" data-target="#loginModal">Login</button>
-            <button ng-show="loggedIn" class="btn searchLogin" id="fav-logout" ng-click="logout()">Logout</button>
+            <button ng-hide="loggedIn" class="btn btn-default searchLogin" data-toggle="modal" id="fav-login" data-target="#loginModal">Login</button>
+            <button ng-show="loggedIn" class="btn btn-default searchLogin" id="fav-logout" ng-click="logout()">Logout</button>
         </div>
     </div>
 
@@ -62,20 +62,20 @@
             </div>
 
             <div class="modal-body" ng-show="moreInfo">
-                <p>First Air Date: {{show.first_aired}}</p>
-                <p>Rating: {{moreShow.rating}}</p>
-                <p>Runtime: {{moreShow.runtime}} minutes</p>
-                <p>Overview: {{moreShow.overview}}</p>
-                <p>Genres:
+                <p><strong>First Air Date:</strong> {{show.first_aired}}</p>
+                <p><strong>Rating:</strong> {{moreShow.rating}}</p>
+                <p><strong>Runtime:</strong> {{moreShow.runtime}} minutes</p>
+                <p><strong>Overview:</strong> {{moreShow.overview}}</p>
+                <p><strong>Genres:</strong>
                     <p ng-repeat="genre in moreShow.genres">
-                        ~ {{genre.title}}
+                        &bull; {{genre.title}}
                     </p>
                 </p>
             </div>
 
             <div class="modal-footer" ng-hide="loading">
                 <a href="" target="_blank" ng-hide="loading" class="mix-link">
-                    <button class="btn" ng-click="moreShowInfo()">More Info</button>
+                    <button class="btn btn-default" ng-click="moreShowInfo()">More Info</button>
                 </a>
                 <!-- <a href="http://www.imdb.com/title/{{show.imdb}}" target="_blank" ng-hide="loading" class="mix-link">
                     <button class="btn">IMDB</button>
@@ -84,10 +84,10 @@
                     <button class="btn">Learn More</button>
                 </a> -->
                 <a href="{{show.tvrage.link}}" target="_blank" ng-hide="loading" class="mix-link">
-                    <button class="btn">Watch Episodes</button>
+                    <button class="btn btn-default">Watch Episodes</button>
                 </a>
                 <a href="" target="_blank" ng-hide="loading" class="mix-link">
-                  <button ng-show="loggedIn && !loading" class="btn" ng-click="addFavoriteShow()">Favorite</button>
+                  <button ng-show="loggedIn && !loading" class="btn btn-default" ng-click="addFavoriteShow()">Favorite</button>
                 </a>
             </div>
         </div>
@@ -128,34 +128,34 @@
 
             <div class="modal-body" ng-show="moreInfo">
 
-                <p>Rating: {{moreMovie.rating}}</p>
-                <p>Runtime: {{moreMovie.duration}} minutes</p>
-                <p>Overview: {{moreMovie.overview}}</p>
-                <p>Genres:
+                <p><strong>Rating:</strong> {{moreMovie.rating}}</p>
+                <p><strong>Runtime:</strong> {{moreMovie.duration}} minutes</p>
+                <p><strong>Overview:</strong> {{moreMovie.overview}}</p>
+                <p><strong>Genres:</strong>
                     <p ng-repeat="genre in moreMovie.genres">
-                        ~ {{genre.title}}
+                        &bull; {{genre.title}}
                     </p>
                 </p>
             </div>
 
             <div class="modal-footer" ng-hide="loading">
               <a href="" target="_blank" ng-hide="loading" class="mix-link">
-                  <button class="btn" ng-click="moreShowInfo()">More Info</button>
+                  <button class="btn btn-default" ng-click="moreShowInfo()">More Info</button>
               </a>
                 <a href="http://www.rottentomatoes.com/m/{{movie.rottentomatoes}}" target="_blank" class="mix-link">
-                    <button ng-hide="loading" class="btn">Check Tomatoes</button>
+                    <button ng-hide="loading" class="btn btn-default">Check Tomatoes</button>
                 </a>
                 <a href="http://www.imdb.com/title/{{movie.imdb}}" target="_blank" class="mix-link">
-                    <button ng-hide="loading" class="btn">IMDB</button>
+                    <button ng-hide="loading" class="btn btn-default">IMDB</button>
                 </a>
                 <!-- <a href="https://en.wikipedia.org/?curid={{movie.wikipedia_id}}" target="_blank" class="mix-link">
                     <button ng-hide="loading" class="btn">Learn More</button>
                 </a> -->
                 <a href="http://www.guidebox.com/choose_source_movie.php?movie_id={{movie.id}}" target="_blank" class="mix-link">
-                    <button ng-hide="loading" class="btn">Viewing Links</button>
+                    <button ng-hide="loading" class="btn btn-default">Viewing Links</button>
                 </a>
                 <a href="" target="_blank" ng-hide="loading" class="mix-link">
-                  <button ng-show="loggedIn && !loading" class="btn" ng-click="addFavoriteMovie()">Favorite</button>
+                  <button ng-show="loggedIn && !loading" class="btn btn-default" ng-click="addFavoriteMovie()">Favorite</button>
                 </a>
 
             </div>
@@ -178,7 +178,7 @@
                 <h1 class="lead alert alert-danger" role="alert" ng-if="message != ''">{{message}}</h2>
               <form ng-submit="login()">
                 <div>
-                    <input class="username" type="text" ng-model="user.username" placeholder="Username" />
+                    <input class="username" type="text" ng-model="user.username" placeholder="Username" autofocus>
                 </div>
                 <div>
                     <input class="password" type="password" ng-model="user.password" placeholder="Password"/>
@@ -189,7 +189,7 @@
               </form>
             </div>
             <div class="modal-footer">
-              <button class="btn" data-toggle="modal" data-target="#registerModal">Register</button>
+              <button class="btn btn-default" data-toggle="modal" data-target="#registerModal">Register</button>
             </div>
         </div>
 
@@ -211,7 +211,7 @@
               <h1 class="lead alert alert-danger" role="alert" ng-if="message != ''">{{message}}</h2>
               <form ng-submit="registerUser()">
                 <div>
-                    <input class="username" type="text" ng-model="user.username" placeholder="Username" />
+                    <input class="username" type="text" ng-model="user.username" placeholder="Username" autofocus>
                 </div>
                 <div>
                     <input class="password" type="password" ng-model="user.password" placeholder="Password" />

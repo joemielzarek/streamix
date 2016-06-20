@@ -189,7 +189,7 @@ myApp.controller('MixController', ['$scope', '$http', '$window', '$location', fu
 
         var i, word, rnd, words, fadeSpeed, timer;
 
-        words = [' ' + 'GREY' + ' ',' ' + 'NORMAL' + ' ',' ' + 'MUNDANE' + ' ', ' ' + 'HUMDRUM' + ' ', '  ' + 'LOWLY' + '  ', ' ' + 'ROUTINE' + ' ', ' ' + 'PROSAIC' + ' ', '  ' + 'BLAH' + '   ', '  ' + 'BORING' + '  ','  ' +  'TRITE' + '  ', '  ' + 'BANAL' + '  ', '  ' + 'DULL' + '  ', '  ' + 'DRAB' + '  ', '  ' + 'STALE' + '  ', ' ' + 'BANAUSIC' + ' ', ' ' + 'INSIPID' + ' ', '  ' + 'BEIGE' + '  ', ' ' + 'ORDINARY' + ' '];
+        words = [' ' + 'GREY' + ' ', ' ' + 'NORMAL' + ' ', ' ' + 'MUNDANE' + ' ', ' ' + 'HUMDRUM' + ' ', '  ' + 'LOWLY' + '  ', ' ' + 'ROUTINE' + ' ', ' ' + 'PROSAIC' + ' ', '  ' + 'BLAH' + '   ', '  ' + 'BORING' + '  ', '  ' + 'TRITE' + '  ', '  ' + 'BANAL' + '  ', '  ' + 'DULL' + '  ', '  ' + 'DRAB' + '  ', '  ' + 'STALE' + '  ', ' ' + 'BANAUSIC' + ' ', ' ' + 'INSIPID' + ' ', '  ' + 'BEIGE' + '  ', ' ' + 'ORDINARY' + ' '];
 
         fadeSpeed = 100;
         timer = 1000;

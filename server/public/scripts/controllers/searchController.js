@@ -6,6 +6,7 @@ myApp.controller('SearchController', ['$scope', '$http', '$window', '$location',
 
     //- - - - - - - Search Guide Box API Functionality - - - - - - -  //
     $scope.searchShow = function() {
+      $scope.loading = true;
         $scope.showResults = true;
         $http.get('https://api-public.guidebox.com/v1.43/US/rK4sScT4OGdI8lVl' +
                 'wAkOzOI5DWLeHqUp/search/title/' + encodeURIComponent($scope.showInput) + '/fuzzy')
@@ -27,6 +28,7 @@ myApp.controller('SearchController', ['$scope', '$http', '$window', '$location',
     };
 
     $scope.searchMovie = function() {
+      $scope.loading = true;
         $scope.movieResults = true;
         $http.get('https://api-public.guidebox.com/v1.43/US/rK4sScT4OGdI8lVl' +
                 'wAkOzOI5DWLeHqUp/search/movie/title/' + encodeURIComponent($scope.movieInput) + '/fuzzy')
